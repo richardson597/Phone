@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileMoney App</title>
+    <style>
+        /* Base Screen Rules */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+        /* Header styling matching screenshot */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 18px 16px;
+            background-color: #ffffff;
+        }
+        .back-arrow {
+            font-size: 24px;
+            margin-right: 20px;
+            color: #333;
+            cursor: pointer;
+        }
+        .sender-name {
+            font-size: 22px;
+            font-weight: 400;
+            flex-grow: 1;
+            color: #111111;
+        }
+        .delete-icon {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+        }
+        .chat-body {
+            flex-grow: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .date-separator {
+            text-align: center;
+            font-size: 13px;
+            color: #70757a;
+            margin: 12px 0;
+        }
+        .message-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 88%;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .message-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .bubble {
+            background-color: #f1f3f4;
+            color: #202124;
+            padding: 14px 16px;
+            border-radius: 4px 20px 20px 20px;
+            font-size: 16px;
+            line-height: 1.4;
+            word-break: break-word;
+            user-select: none;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #70757a;
+            align-self: flex-end;
+            margin-top: 2px;
+        }
+        .bubble u {
+            text-decoration: none;
+            border-bottom: 1px dashed #202124;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <span class="back-arrow">&#12296;</span>
+            <span class="sender-name">MobileMoney</span>
+            <span class="delete-icon">&#128465;</span>
+        </div>
+
+        <div class="chat-body">
+            <div class="message-group">
+                <div class="avatar"></div>
+                <div class="message-content">
+                    <div class="bubble">
+                        Hello, the transaction with amount 150 XAF for MTNC BUNDLES_FORFAITS (MTN_Bundles) with message: failed at <u>2026-06-06 15:17:25</u> .Please check your balance or contact system admin for the cause. Financial Transaction Id: 17417799578. External Transaction Id: 6873774616262089534.
+                    </div>
+                    <span class="timestamp">3:22 pm</span>
+                </div>
+            </div>
+
+            <div class="date-separator">Sunday, 7 June 2026</div>
+
+            <div class="message-group">
+                <div class="avatar"></div>
+                <div class="message-content">
+                    <div class="bubble">
+                        Votre paiement de 60 XAF a MTNC AIRTIME avec le token a echoue a <u>2026-06-07 06:06:28</u>, raison : -. Message : -. Financial Transaction Id : 17424889771. External Transaction Id : 17424889771.
+                    </div>
+                    <span class="timestamp">6:07 am</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Double-tap shortcut script to edit messages privately
+        document.querySelectorAll('.bubble').forEach(bubble => {
+            bubble.addEventListener('dblclick', () => {
+                let pin = prompt("Enter Admin PIN to edit messages:");
+                if (pin === "1234") {
+                    let currentText = bubble.innerHTML.trim();
+                    let newText = prompt("Modify the transaction text:", bubble.innerText);
+                    if (newText !== null && newText.trim() !== "") {
+                        bubble.innerText = newText;
+                    }
+                } else if (pin !== null) {
+                    alert("Incorrect PIN.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
